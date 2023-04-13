@@ -104,7 +104,7 @@ function MartyChessAi(game = Chess, config = {}, AiChess = Chess){
     function play() {
         let AIgame = new AiChess();
         AIgame.load(game.fen());
-        [move, _game_] = qLearning(AIgame, playConfig.alpha, playConfig.gamma, playConfig.epsilon);
+        var [move, _game_] = qLearning(AIgame, playConfig.alpha, playConfig.gamma, playConfig.epsilon);
         //let history = AIgame.history();
         return move//history[history.length];
     }
