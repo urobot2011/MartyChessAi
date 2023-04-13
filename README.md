@@ -3,6 +3,9 @@ Reinforcement Learning Marty Chess Engine.(aka Marty Deep Chess)
 
 
 How to use:
+```html
+<script src="https://urobot2011.github.io/MartyChessAi/src/MartyChessAi.js"></script>
+```
 ```js
 var game = new Chess();
 var Marty = new MartyChessAi(game);
