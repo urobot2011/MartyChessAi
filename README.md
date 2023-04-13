@@ -6,9 +6,14 @@ How to use:
 ```html
 <script src="https://urobot2011.github.io/MartyChessAi/src/MartyChessAi.js"></script>
 ```
+```html
+<!-- model -->
+<script src="https://urobot2011.github.io/MartyChessAi/model/model_1000data.js"></script>
+```
 ```js
 var game = new Chess();
 var Marty = new MartyChessAi(game);
+Marty.fromJSON(MartyChessAiModels.model_1000);
 Marty.train(50); // Higher this number gives better performance but slower learning
 // game.move(Marty.play());
 while(!game.game_over()) {
