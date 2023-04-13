@@ -97,7 +97,7 @@ function MartyChessAi(MAINgame = new Chess(), config = {}, AiChess = Chess){
         console.log(game);
         for(let i = 0; i < episodes; i++) {
             while(!game.game_over()) {
-                game = qLearning(game, trainConfig.alpha, trainConfig.gamma, trainConfig.epsilon);
+                [_move, game] = qLearning(game, trainConfig.alpha, trainConfig.gamma, trainConfig.epsilon);
             }
             game.reset();
         }
