@@ -90,7 +90,7 @@ function MartyChessAi(game = Chess, config = {}, AiChess = Chess){
             if(QTable[state][nextMove] == null) QTable[state][nextMove] = {};
             QTable[state][nextMove] += alpha * (gamma * Math.max(...Object.values(QTable[nextState])) - QTable[state][nextMove]);
         }
-        return game;
+        return [nextMove, game];
     }
     function train(episodes) {
         let game = new AiChess();
@@ -104,9 +104,9 @@ function MartyChessAi(game = Chess, config = {}, AiChess = Chess){
     function play() {
         let AIgame = new AiChess();
         AIgame.load(game.fen());
-        qLearning(AIgame, playConfig.alpha, playConfig.gamma, playConfig.epsilon);
-        let history = AIgame.history();
-        return history[history.length];
+        [move, _game_] = qLearning(AIgame, playConfig.alpha, playConfig.gamma, playConfig.epsilon);
+        //let history = AIgame.history();
+        return move//history[history.length];
     }
     function setConfig(set_config) {
         config = set_config;
