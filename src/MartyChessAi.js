@@ -1,4 +1,4 @@
-function MartyChessAi(game = new Chess(), config = {}, AiChess = Chess){
+function MartyChessAi(MAINgame = new Chess(), config = {}, AiChess = Chess){
     const COL = 'abcdefgh'.split('');
     const ptn = {
         'p': 1,
@@ -94,6 +94,7 @@ function MartyChessAi(game = new Chess(), config = {}, AiChess = Chess){
     }
     function train(episodes) {
         let game = new AiChess();
+        console.log(game);
         for(let i = 0; i < episodes; i++) {
             while(!game.game_over()) {
                 game = qLearning(game, trainConfig.alpha, trainConfig.gamma, trainConfig.epsilon);
@@ -103,7 +104,7 @@ function MartyChessAi(game = new Chess(), config = {}, AiChess = Chess){
     }
     function play() {
         let AIgame = new AiChess();
-        AIgame.load(game.fen());
+        AIgame.load(MAINgame.fen());
         var [move, _game_] = qLearning(AIgame, playConfig.alpha, playConfig.gamma, playConfig.epsilon);
         //let history = AIgame.history();
         return move//history[history.length];
