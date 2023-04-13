@@ -135,12 +135,12 @@ function MartyChessAi(MAINgame = new Chess(), config = {}, AiChess = Chess){
         return config;
     }
     function fromJSON(json) {
-        //json = JSON.parse(json);
+        json = JSON.parse(json);
         QTable = json.table;
         setConfig(json.config);
     }
     function toJSON() {
-        return {table: QTable, config};//JSON.stringify({table: QTable, config});
+        return JSON.stringify({table: QTable, config});
     }
     function setGame(set_game) {
         game = set_game;
