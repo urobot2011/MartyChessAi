@@ -1,4 +1,4 @@
-function MartyChessAi(game = Chess, config = {}, AiChess = Chess){
+function MartyChessAi(game = new Chess(), config = {}, AiChess = Chess){
     const COL = 'abcdefgh'.split('');
     const ptn = {
         'p': 1,
