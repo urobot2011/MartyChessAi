@@ -25,6 +25,15 @@ function MartyChessAi(MAINgame = new Chess(), config = {}, AiChess = Chess){
         gamma: config.play.gamma ? config.train.gamma : 0, 
         epsilon: config.play.epsilon ? config.train.epsilon : 1
     };
+    function initializeQTable(game) {
+        const state = getState(game);
+        if(!QTable[state]) {
+            QTable[state] = {};
+            game.moves().forEach(move => {
+                QTable[state][move] = 0;
+            });
+        }
+    }
     function reward(game) {
         if(game.in_checkmate()) {
             if(game.turn() === 'w') {
@@ -82,12 +91,11 @@ function MartyChessAi(MAINgame = new Chess(), config = {}, AiChess = Chess){
         game.move(nextMove);
         const nextState = getState(game);
         const r = reward(game);
+        initializeQTable(game);
         if(r !== null) {
-            if(QTable[state][nextMove] == null) QTable[state][nextMove] = {};
             QTable[state][nextMove] += alpha * (r - QTable[state][nextMove]);
-        } else {
-            if(QTable[nextState] == null) QTable[nextState] = {};
-            if(QTable[state][nextMove] == null) QTable[state][nextMove] = {};
+        }
+        else {
             QTable[state][nextMove] += alpha * (gamma * Math.max(...Object.values(QTable[nextState])) - QTable[state][nextMove]);
         }
         return [nextMove, game];
