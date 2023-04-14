@@ -15,7 +15,19 @@ var game = new Chess();
 var Marty = new MartyChessAi(game);
 Marty.fromJSON(MartyChessAiModels.model_1000);
 Marty.train(50); // Higher this number gives better performance but slower learning
-// game.move(Marty.play());
+
+game.reset();
+game.header('White', 'MartyBot L6');
+game.header('Black', 'MartyBot L6');
+while(!game.game_over()) {
+	var move = Marty.play();
+	game.move(move);
+}
+console.log('Game over. Pgn:', game.pgn());
+//
+game.reset();
+game.header('White', 'you');
+game.header('Black', 'MartyChessAi');
 while(!game.game_over()) {
 	if(game.turn() === 'w') {
 		console.log(game.ascii());
@@ -26,7 +38,7 @@ while(!game.game_over()) {
 		console.log(game.ascii());
 	}
 }
-console.log('Game over. Result:', game.result());
+console.log('Game over. Pgn:', game.pgn());
 ```
 
 ## todo
